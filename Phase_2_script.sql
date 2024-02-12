@@ -18,7 +18,7 @@ CREATE TABLE Manager(m_userID INT NOT NULL, degree CHAR(20), salary INT NOT NULL
 
 CREATE TABLE Store (storeID INT NOT NULL, latitude DECIMAL(8,6) NOT NULL, longitude DECIMAL(9,6) NOT NULL, date_established date, m_userID INT NOT NULL, PRIMARY KEY(storeID), FOREIGN KEY(m_userID) REFERENCES Manager(m_userID), UNIQUE(storeID, m_userID));
 
-CREATE TABLE Product (storeID INT NOT NULL, productname CHAR(30) NOT NULL, num_units INT NOT NULL, price_per_unit INT NOT NULL, description CHAR(100), imageurl CHAR(100), PRIMARY KEY(storeID), FOREIGN KEY(storeID) REFERENCES Store(storeID), UNIQUE(storeID));
+CREATE TABLE Product (storeID INT NOT NULL, productname CHAR(30) NOT NULL, num_units INT NOT NULL, price_per_unit INT NOT NULL, description CHAR(100), imageurl CHAR(100), PRIMARY KEY(storeID,productname), FOREIGN KEY(storeID) REFERENCES Store(storeID), UNIQUE(storeID));
 
 CREATE TABLE Orders (c_userID INT NOT NULL, prodstoreID INT NOT NULL, units_ordered INT NOT NULL, orderdate date, PRIMARY KEY(c_userID, prodstoreID), FOREIGN KEY (c_userID) REFERENCES Customer(c_userID), FOREIGN KEY (prodstoreID) REFERENCES Product(storeID), UNIQUE(c_userID, prodstoreID));
 
